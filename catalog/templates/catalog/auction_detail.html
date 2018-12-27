@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Title: {{ auction.name }}</h1>
+
+  <p><strong>Start at:</strong> {{ auction.start_time }}</p>
+  <p><strong>Duration:</strong> {{ auction.duration }}</p>
+  <p><strong>Category:</strong> {{ auction.category }}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Lots:</h4>
+
+    <ul>
+        {% for cur_lot in auction.lot_set.all %}
+
+            <li><a href="{% url 'lot-detail' cur_lot.id %}">{{cur_lot.name}}</a></li>
+            <hr>
+        {% endfor %}
+    </ul>
+
+  </div>
+{% endblock %}

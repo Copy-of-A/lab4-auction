@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Auction List</h1>
+
+    {% if auction_list %}
+    <ul>
+
+      {% for auction in auction_list %}
+      <li>
+        <a href="{{ auction.get_absolute_url }}">{{ auction.name }}</a>
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no auctions yet.</p>
+    {% endif %}       
+{% endblock %}

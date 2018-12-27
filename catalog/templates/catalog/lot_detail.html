@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Title: {{ lot.name }}</h1>
+
+    <p><strong>Auction:</strong> <a href="{% url 'auction-detail' lot.auction.pk %}">{{ lot.auction }}</a></p>
+    <p><strong>Start from:</strong> {{ lot.start_price }}</p>
+    <p><strong>Start at:</strong> {{ lot.start_time }}</p>
+    <p><strong>Duration:</strong> {{ lot.duration }}</p>
+    <p><strong>Step:</strong> {{ lot.step }}</p>
+    <p><strong>Seller:</strong> {{ lot.seller }}</p>
+{% endblock %}

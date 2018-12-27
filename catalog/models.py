@@ -22,11 +22,8 @@ class Category(models.Model):
 
 
 class Auction(models.Model):
-    # пускай будет имя - почему бы и нет
     name = models.CharField(max_length=200, help_text="Enter an auction name")
-    # время начала
     start_time = models.DateTimeField(help_text="Enter a starting time")
-    # продолжительность аукциона
     duration = models.DurationField(help_text="Enter a duration time")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, help_text="Select a category for this auction")
     # ManyToManyField used because category can contain many auctions. Auctions can cover many categories.
@@ -48,19 +45,13 @@ class Auction(models.Model):
 
 
 class Lot(models.Model):
-    # наименование лота
     name = models.CharField(max_length=200, help_text="Enter a lot name")
-    # начальная цена
     start_price = models.DecimalField(max_digits=10, decimal_places=3, blank=False, null=False,
                                       help_text="Enter a starting price")
-    # время начала
     start_time = models.DateTimeField(help_text="Enter a starting time")
-    # продолжительность торгов
     duration = models.DurationField(help_text="Enter a duration time")
-    # шаг ставки
     step = models.DecimalField(max_digits=10, decimal_places=3, blank=False, null=False,
                                help_text="Enter a starting price")
-    # продавец
     seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     # Foreign Key used because lot can only have one auction, but auctions can have multiple lots
     auction = models.ForeignKey(Auction, on_delete=models.SET_NULL, null=True)
