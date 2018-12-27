@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Auction Trading Center Home</h1>
+
+  <p>Welcome to <em>Auction Trading Center</em></p>
+
+<h2>Dynamic content</h2>
+
+  <p>The library has the following record counts:</p>
+  <ul>
+    <li><strong>Auctions:</strong> {{ num_auctions }}</li>
+    <li><strong>Lots:</strong> {{ num_lots }}</li>
+    <!--<li><strong>Lots available:</strong> {{ num_lots_available }}</li>-->
+  </ul>
+
+{% endblock %}

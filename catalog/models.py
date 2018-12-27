@@ -7,7 +7,12 @@ class Category(models.Model):
     """
     Model representing a category of auction (e.g. Charity, Electronics etc.).
     """
+
     name = models.CharField(max_length=200, help_text="Enter a category of auction (e.g. Charity, Electronics etc.)")
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+        ordering = ["name"]
 
     def __str__(self):
         """
@@ -23,8 +28,11 @@ class Auction(models.Model):
     start_time = models.DateTimeField(help_text="Enter a starting time")
     # продолжительность аукциона
     duration = models.DurationField(help_text="Enter a duration time")
-    category = models.ManyToManyField(Category, help_text="Select a category for this auction")
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, help_text="Select a category for this auction")
     # ManyToManyField used because category can contain many auctions. Auctions can cover many categories.
+
+    class Meta:
+        ordering = ["name", "start_time"]
 
     def __str__(self):
         """
