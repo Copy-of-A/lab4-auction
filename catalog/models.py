@@ -22,6 +22,14 @@ class Category(models.Model):
         """
         return self.name
 
+'''
+class User(AbstractUser):
+    account = models.DecimalField(max_digits=10, decimal_places=1, blank=False, null=True)
+    favourites = models.ManyToManyField(Category, null=True)
+
+    def __str__(self):
+        return self.username
+'''
 
 class Auction(models.Model):
     name = models.CharField(max_length=200, help_text="Enter an auction name")
@@ -61,8 +69,8 @@ class Lot(models.Model):
     seller = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     # Foreign Key used because lot can only have one auction, but auctions can have multiple lots
     auction = models.ForeignKey(Auction, on_delete=models.SET_NULL, null=True)
-    is_on_auction = models.BooleanField()
-    is_sold = models.BooleanField()
+    is_on_auction = models.BooleanField(default=False)
+    is_sold = models.BooleanField(default=False)
 
     @property
     def finish_time(self):
@@ -87,6 +95,5 @@ class Lot(models.Model):
         return reverse('lot-detail', args=[str(self.id)])
 
 
-class User(AbstractUser):
-    account = models.DecimalField(max_digits=10, decimal_places=1, blank=False, null=False)
-    favourites = models.ManyToManyField(Category, on_delete=models.SET_NULL, null=True)
+
+

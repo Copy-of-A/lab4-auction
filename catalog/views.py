@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from .models import Auction, Lot
 from django.views import generic
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
@@ -45,3 +45,11 @@ class AuctionListView(generic.ListView):
 class AuctionDetailView(generic.DetailView):
     model = Auction
 
+
+class LotsForSaleByUserListView(LoginRequiredMixin, generic.ListView):
+    model = Lot
+    template_name = 'catalog/lot_list_for_sale.html'
+    paginate_by = 5
+
+    def get_queryset(self):
+        return Lot.objects.filter(seller=self.request.user).filter(is_sold='False').order_by('name')
